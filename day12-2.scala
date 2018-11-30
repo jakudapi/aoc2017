@@ -61,7 +61,7 @@ import util.control.Breaks._
   var allVisited: Set[Int] = Set()
   var counter = 0
 
-  val allNodesList: List[(Int, Node)] = rawInput
+  val allNodesMap: Map[Int, Node] = rawInput
     .map { row =>
       row.split(" <-> ")
     } // ("0", "480, 1750")
@@ -70,11 +70,9 @@ import util.control.Breaks._
       val dest: List[Int] = row(1).split(", ").map(_.toInt).toList
       (id, Node(id, dest))
     }
-    .toList
+    .toMap
 
-  val allNodesMap: Map[Int, Node] = allNodesList.toMap
-
-  for ((id, node) <- allNodesList) {
+  for (id <- allNodesMap.keys) {
     breakable {
       if (allVisited.contains(id)) break
       else {
@@ -96,5 +94,7 @@ import util.control.Breaks._
     }
   }
 
+  val endTime = System.nanoTime()
   println(counter)
+  println(s"This took ${(endTime-startTime)/1000000} msecs")
 
