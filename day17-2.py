@@ -35,6 +35,6 @@ if __name__ == "__main__":
     current = current.next_node
 
   end_t = time()
-  print(current)
+  print(head)
   print(f"this took {round(end_t - start_t,5)} secs")
 
